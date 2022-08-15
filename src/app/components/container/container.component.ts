@@ -36,12 +36,19 @@ export class ContainerComponent implements OnInit {
   sendStudent() {
     if (this.name != '' && this.surname != '') {
       const body: Student = { id: 0, name: this.name, surname: this.surname };
-      this._students.postStudents(body).subscribe((res) => {
-        this.ngOnInit();
-        this.name = '';
-        this.surname = '';
-        this.openSnackBar('Se ha creado un usuario', 'cerrar');
-      });
+      this._students.postStudents(body).subscribe(
+        (res) => {
+          this.ngOnInit();
+          this.name = '';
+          this.surname = '';
+          this.openSnackBar('✔️ Se ha creado un usuario', 'cerrar');
+        },
+        (err) => {
+          this.name = '';
+          this.surname = '';
+          this.openSnackBar('❌ El usuario no se ha podido crear', 'cerrar');
+        }
+      );
     }
   }
 }

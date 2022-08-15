@@ -22,9 +22,14 @@ export class StudentCardComponent implements OnInit {
   }
 
   deleteClick(id: number) {
-    this._students.deleteStudent(id).subscribe((res) => {
-      this.changes.emit(`Se ha borrado al usuario: ${this.id}`);
-    });
+    this._students.deleteStudent(id).subscribe(
+      (res) => {
+        this.changes.emit(`Se ha borrado al usuario: ${this.id}`);
+      },
+      (err) => {
+        this.changes.emit(`❌ No se ha podido borrar: ${this.id}`);
+      }
+    );
   }
 
   updateClick() {
@@ -38,10 +43,15 @@ export class StudentCardComponent implements OnInit {
         name: this.name,
         surname: this.surname,
       };
-      this._students.updateStudent(body).subscribe((res) => {
-        this.changes.emit(`Se ha actualizado al usuario: ${this.id}`);
-        this.edit = false;
-      });
+      this._students.updateStudent(body).subscribe(
+        (res) => {
+          this.changes.emit(`Se ha actualizado al usuario: ${this.id}`);
+          this.edit = false;
+        },
+        (err) => {
+          this.changes.emit(`❌ No se ha podido actualizar: ${this.id}`);
+        }
+      );
     }
   }
 }
