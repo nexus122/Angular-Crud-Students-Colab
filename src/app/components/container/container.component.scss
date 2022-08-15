@@ -1,0 +1,15 @@
+mat-card {
+  margin-bottom: 1em;
+}
+
+.flex {
+  padding: 1em;
+  box-sizing: border-box;
+
+  .cardContainer {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 1em;
+  }
+}

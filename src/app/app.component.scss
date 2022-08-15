@@ -1,0 +1,22 @@
+.general {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 100vh;
+  min-width: 100vw;
+
+  .body {
+    width: 100%;
+    display: block;
+    box-sizing: border-box;
+  }
+
+  app-header {
+    width: 100%;
+  }
+
+  app-footer {
+    width: 100%;
+  }
+}

@@ -1,0 +1,38 @@
+<div class="flex">
+  <mat-card class="example-card">
+    <mat-card-title>Crear Estudiantes</mat-card-title>
+    <mat-card-content>
+      <form class="example-form">
+        <table class="example-full-width" cellspacing="0">
+          <tr>
+            <td>
+              <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>First name</mat-label>
+                <input matInput name="name" [(ngModel)]="name" />
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Last Name</mat-label>
+                <input matInput name="surname" [(ngModel)]="surname" />
+              </mat-form-field>
+            </td>
+          </tr>
+        </table>
+      </form>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-button (click)="sendStudent()">Enviar</button>
+    </mat-card-actions>
+  </mat-card>
+
+  <!-- Cards -->
+  <div class="cardContainer">
+    <app-student-card
+      *ngFor="let student of students | async"
+      [student]="student"
+      (changes)="newChanges($event)"
+    ></app-student-card>
+  </div>
+</div>
