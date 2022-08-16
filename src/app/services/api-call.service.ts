@@ -7,19 +7,19 @@ import { Observable } from 'rxjs';
 })
 export abstract class ApiCallService<T> {
   constructor(protected http: HttpClient) {}
-  getData(params: string): Observable<any> {
-    return this.http.get(environment.apiCrud + params);
+  getData(params: string): Observable<T> {
+    return this.http.get<T>(environment.apiCrud + params);
   }
 
-  addData(params: string, body: T) {
-    return this.http.post(`${environment.apiCrud}${params}`, body);
+  addData(params: string, body: T): Observable<T> {
+    return this.http.post<T>(`${environment.apiCrud}${params}`, body);
   }
 
   deleteData(params: string, id: number) {
-    return this.http.delete(`${environment.apiCrud}${params}/${id}`);
+    return this.http.delete<T>(`${environment.apiCrud}${params}/${id}`);
   }
 
   updateData(params: string, body: T) {
-    return this.http.patch(`${environment.apiCrud}${params}`, body);
+    return this.http.patch<T>(`${environment.apiCrud}${params}`, body);
   }
 }

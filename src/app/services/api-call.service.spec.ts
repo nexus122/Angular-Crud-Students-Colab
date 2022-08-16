@@ -1,9 +1,9 @@
 import { TestBed } from '@angular/core/testing';
-
+import Student from '../models/Student';
 import { ApiCallService } from './api-call.service';
 
 describe('ApiCallService', () => {
-  let service: ApiCallService;
+  let service: ApiCallService<Student>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});

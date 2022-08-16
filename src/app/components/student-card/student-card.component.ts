@@ -7,8 +7,8 @@ import { StudentsService } from 'src/app/services/students.service';
   styleUrls: ['./student-card.component.scss'],
 })
 export class StudentCardComponent implements OnInit {
-  @Input() student: any;
-  @Output() changes: EventEmitter<any> = new EventEmitter<any>();
+  @Input() student!: Student;
+  @Output() changes: EventEmitter<string> = new EventEmitter<string>();
   id!: number;
   name!: string;
   surname!: string;
@@ -22,14 +22,14 @@ export class StudentCardComponent implements OnInit {
   }
 
   deleteClick(id: number) {
-    this._students.deleteStudent(id).subscribe(
-      (res) => {
+    this._students.deleteStudent(id).subscribe({
+      next: () => {
         this.changes.emit(`Se ha borrado al usuario: ${this.id}`);
       },
-      (err) => {
+      error: () => {
         this.changes.emit(`❌ No se ha podido borrar: ${this.id}`);
-      }
-    );
+      },
+    });
   }
 
   updateClick() {
@@ -43,15 +43,15 @@ export class StudentCardComponent implements OnInit {
         name: this.name,
         surname: this.surname,
       };
-      this._students.updateStudent(body).subscribe(
-        (res) => {
+      this._students.updateStudent(body).subscribe({
+        next: () => {
           this.changes.emit(`Se ha actualizado al usuario: ${this.id}`);
           this.edit = false;
         },
-        (err) => {
+        error: () => {
           this.changes.emit(`❌ No se ha podido actualizar: ${this.id}`);
-        }
-      );
+        },
+      });
     }
   }
 }

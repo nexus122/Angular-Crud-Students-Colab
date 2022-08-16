@@ -15,17 +15,21 @@ export class ContainerComponent implements OnInit {
     private _snackBar: MatSnackBar
   ) {}
 
-  students!: Observable<any>;
+  students!: Observable<Student>;
 
   name = '';
   surname = '';
 
   ngOnInit(): void {
+    this.loadStudents();
+  }
+
+  loadStudents() {
     this.students = this._students.getStudent();
   }
 
   newChanges(param: any) {
-    this.ngOnInit();
+    this.loadStudents();
     this.openSnackBar(param, 'cerrar');
   }
 
@@ -36,19 +40,19 @@ export class ContainerComponent implements OnInit {
   sendStudent() {
     if (this.name != '' && this.surname != '') {
       const body: Student = { id: 0, name: this.name, surname: this.surname };
-      this._students.postStudents(body).subscribe(
-        (res) => {
-          this.ngOnInit();
+      this._students.postStudents(body).subscribe({
+        next: () => {
+          this.loadStudents();
           this.name = '';
           this.surname = '';
           this.openSnackBar('✔️ Se ha creado un usuario', 'cerrar');
         },
-        (err) => {
+        error: () => {
           this.name = '';
           this.surname = '';
           this.openSnackBar('❌ El usuario no se ha podido crear', 'cerrar');
-        }
-      );
+        },
+      });
     }
   }
 }

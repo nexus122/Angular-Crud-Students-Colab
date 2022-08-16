@@ -2,7 +2,7 @@
 Para arrancar el servidor que mantiene el Crud deberas abrir docker y ejecutar el siguiente comando:
 ## 🐋 Docker
 ```
-docker run -p49155:80 jpromeropereira/students-crud:latest
+docker run -p49155:80 jpromeropereira/studentscrud
 ```
 ⚠️ Si quieres utilizar este docker para tu prouyecto asegurate de poner tu puerto en lugar del **49155**
 

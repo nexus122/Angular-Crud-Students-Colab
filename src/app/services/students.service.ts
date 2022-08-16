@@ -11,19 +11,19 @@ export class StudentsService extends ApiCallService<Student> {
     super(http);
   }
 
-  getStudent(): Observable<any> {
+  getStudent(): Observable<Student> {
     return this.getData('students/list');
   }
 
-  postStudents(body: Student): Observable<any> {
+  postStudents(body: Student): Observable<Student> {
     return this.addData('students/add', body);
   }
 
-  deleteStudent(id: number): Observable<any> {
+  deleteStudent(id: number): Observable<Student> {
     return this.deleteData('students/delete', id);
   }
 
-  updateStudent(body: Student): Observable<any> {
+  updateStudent(body: Student): Observable<Student> {
     return this.updateData('students/update', body);
   }
 }
